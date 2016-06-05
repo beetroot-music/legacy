@@ -71,13 +71,13 @@ namespace BeetrootUI
                     TagLib.File songFile = TagLib.File.Create(file);
 
                     // Check if a composer tag exists
-                    if (songFile.Tag.Composers[0] != null)
+                    if (songFile.Tag.Performers != null)
                     {
 
                         // If a directory is not existent create it
-                        if (!Directory.Exists(Path.Combine(destination, songFile.Tag.Composers[0])))
+                        if (!Directory.Exists(Path.Combine(destination, songFile.Tag.Performers[0])))
                         {
-                            Directory.CreateDirectory(Path.Combine(destination, songFile.Tag.Composers[0]));
+                            Directory.CreateDirectory(Path.Combine(destination, songFile.Tag.Performers[0]));
                             addToOutput("Composer directory not found. Creating one...");
                         }
 
@@ -86,9 +86,9 @@ namespace BeetrootUI
                         {
 
                             // If a directory is not existent create it
-                            if (!Directory.Exists(Path.Combine(destination, songFile.Tag.Composers[0], songFile.Tag.Album)))
+                            if (!Directory.Exists(Path.Combine(destination, songFile.Tag.Performers[0], songFile.Tag.Album)))
                             {
-                                Directory.CreateDirectory(Path.Combine(destination, songFile.Tag.Composers[0], songFile.Tag.Album));
+                                Directory.CreateDirectory(Path.Combine(destination, songFile.Tag.Performers[0], songFile.Tag.Album));
                                 addToOutput("Album directory not found. Creating one...");
                             }
 
@@ -96,12 +96,12 @@ namespace BeetrootUI
                             if (songFile.Tag.Title != null)
                             {
                                 // If it does, copy the file and change the name
-                                System.IO.File.Copy(file, Path.Combine(destination, songFile.Tag.Composers[0], songFile.Tag.Album, songFile.Tag.Title + ".mp3"));
+                                System.IO.File.Copy(file, Path.Combine(destination, songFile.Tag.Performers[0], songFile.Tag.Album, songFile.Tag.Title + ".mp3"));
                             }
                             else
                             {
                                 // Otherwise, just copy the file keeping the name
-                                System.IO.File.Copy(file, Path.Combine(destination, songFile.Tag.Composers[0], songFile.Tag.Album, Path.GetFileName(file)));
+                                System.IO.File.Copy(file, Path.Combine(destination, songFile.Tag.Performers[0], songFile.Tag.Album, Path.GetFileName(file)));
                             }
 
                         }
@@ -110,11 +110,11 @@ namespace BeetrootUI
                             addToOutput("Album tag not found. Will be put in 'unsorted'.");
 
                             // Create directory if it doesn't exist
-                            if (!Directory.Exists(Path.Combine(destination, songFile.Tag.Composers[0], "unsorted")))
-                                Directory.CreateDirectory(Path.Combine(destination, songFile.Tag.Composers[0], "unsorted"));
+                            if (!Directory.Exists(Path.Combine(destination, songFile.Tag.Performers[0], "unsorted")))
+                                Directory.CreateDirectory(Path.Combine(destination, songFile.Tag.Performers[0], "unsorted"));
 
                             // Copy the file there
-                            System.IO.File.Copy(file, Path.Combine(destination, songFile.Tag.Composers[0], "unsorted", Path.GetFileName(file)));
+                            System.IO.File.Copy(file, Path.Combine(destination, songFile.Tag.Performers[0], "unsorted", Path.GetFileName(file)));
 
                         }
 
@@ -138,7 +138,7 @@ namespace BeetrootUI
                 catch (Exception ex)
                 {
 
-                    addToOutput("Error" + ex.Message);
+                    addToOutput("Error - " + ex.Message);
 
                 }
 
