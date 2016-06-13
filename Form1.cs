@@ -54,7 +54,7 @@ namespace BeetrootUI
         public void sortSongs(string folder)
         {
 
-            addToOutput("Scanning input folder...");
+            addToOutput("Importing songs...");
             string[] fileArray = Directory.GetFiles(folder, "*.mp3", SearchOption.AllDirectories);
 
             foreach (string file in fileArray)
@@ -64,10 +64,10 @@ namespace BeetrootUI
                 try
                 {
 
-                    addToOutput("Selected song: " + file);
+                    //addToOutput("Selected song: " + file);
 
                     // Load song file into taglib
-                    addToOutput("Reading song metadata...");
+                    //addToOutput("Reading song metadata...");
                     TagLib.File songFile = TagLib.File.Create(file);
 
                     // Check if a composer tag exists
@@ -78,7 +78,7 @@ namespace BeetrootUI
                         if (!Directory.Exists(Path.Combine(destination, songFile.Tag.Performers[0])))
                         {
                             Directory.CreateDirectory(Path.Combine(destination, songFile.Tag.Performers[0]));
-                            addToOutput("Composer directory not found. Creating one...");
+                            //addToOutput("Composer directory not found. Creating one...");
                         }
 
                         // Check if an album tag exists
@@ -89,7 +89,7 @@ namespace BeetrootUI
                             if (!Directory.Exists(Path.Combine(destination, songFile.Tag.Performers[0], songFile.Tag.Album)))
                             {
                                 Directory.CreateDirectory(Path.Combine(destination, songFile.Tag.Performers[0], songFile.Tag.Album));
-                                addToOutput("Album directory not found. Creating one...");
+                                //addToOutput("Album directory not found. Creating one...");
                             }
 
                             // Check if a title tag exists
